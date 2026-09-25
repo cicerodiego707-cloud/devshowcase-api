@@ -7,13 +7,12 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 // 🏛️ 1. CONEXÃO COM O BANCO DE DADOS POSTGRESQL NA NUVEM
-// 🏛️ 1. CONEXÃO COM O BANCO DE DADOS POSTGRESQL NA NUVEM
-const connectionString = 'postgresql://postgres:Faw3kVHDvB1RlOdv@://supabase.com';
+const connectionString = process.env.DATABASE_URL;
+
 const pool = new Pool({
     connectionString: connectionString,
     ssl: { rejectUnauthorized: false }
-});
-// Inicialização automática das tabelas no PostgreSQL (Adequando a sintaxe SERIAL e tipos)
+});// Inicialização automática das tabelas no PostgreSQL (Adequando a sintaxe SERIAL e tipos)
 const initDb = async () => {
     try {
         await pool.query(`
